@@ -11,7 +11,7 @@ export function HomePage() {
             <h2 className="text-xl text-gray-500 dark:text-lime-500">
               A CRM Project
             </h2>
-            <button class="bg-lime-500 hover:bg-lime-600 text-white font-bold mt-5 py-2 px-4 rounded-full">
+            <button className="bg-lime-500 hover:bg-lime-600 text-white font-bold mt-5 py-2 px-4 rounded-full">
               Check it out!
             </button>
           </div>

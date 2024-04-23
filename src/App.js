@@ -2,6 +2,7 @@ import './App.css';
 import * as React from "react";
 import { HomePage } from './pages/Home'
 import { LoginForm } from './pages/Login';
+import { ContactsPage } from './pages/Contacts';
 import {
   Routes,
   Route
@@ -27,6 +28,12 @@ const Dash = () => {
   )
 }
 
+const Contact = () => {
+  return (
+    <ContactsPage />
+  )
+}
+
 export default function App() {
   return (
     <div>
@@ -34,6 +41,7 @@ export default function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/dashboard' element={<Dash />} />
+        <Route path='/contacts' element={<Contact />} />
       </Routes>
     </div>
   );
