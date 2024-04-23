@@ -39,6 +39,10 @@ body {
 
 .container {
   margin: 0 auto;
-  padding: 50px;
+  padding: 0 px;
+}
+
+.dashboard-content {
+  padding: 50px; /* Apply padding only to the dashboard content */
 }
 
