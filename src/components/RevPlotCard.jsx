@@ -1,5 +1,4 @@
 import { Line } from "react-chartjs-2";
-import Chart from "chart.js/auto";
 export const RevPlot = () => {
   const revenueData = {
     labels: ["January", "February", "March", "April", "May", "June"],
@@ -8,7 +7,7 @@ export const RevPlot = () => {
         label: "Revenue",
         data: [5000, 3000, 7000, 4000, 6000, 8000],
         fill: true,
-        backgroundColor: "#171717", // Fill color
+        backgroundColor: "#1f1f1f", // Fill color
         borderColor: "#84cc16", // Line color
         tension: 0.4, // Smooth curve
       },
@@ -52,7 +51,7 @@ export const RevPlot = () => {
   };
   return (
     <div
-      className="mt-5 bg-neutral-900 p-5 rounded-lg hover:shadow-2xl"
+      className="mt-5 bg-neutral-800 p-5 rounded-lg hover:shadow-3xl"
       style={{ width: "100%", height: "300px" }}
     >
       <h2 className="text-lg font-semibold text-white">Revenue</h2>

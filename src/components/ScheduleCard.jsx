@@ -6,7 +6,7 @@ export const Meetings = () => {
     // Add more meetings as needed
   ];
   return (
-    <div className="mt-5 bg-neutral-900 p-5 rounded-lg hover:shadow-2xl">
+    <div className="mt-5 bg-neutral-800 p-5 rounded-lg hover:shadow-2xl">
       <h2 className="text-lg font-semibold mb-3 text-white">
         Upcoming Schedule
       </h2>

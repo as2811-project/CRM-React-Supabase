@@ -7,7 +7,7 @@ export const DealsCard = () => {
     { id: 3, name: "Deal 3", amount: 2000, status: "Lost" },
   ];
   return (
-    <div className="bg-neutral-900 p-5 rounded-lg hover:shadow-2xl">
+    <div className="bg-neutral-800 p-5 rounded-lg hover:shadow-2xl">
       <h2 className="text-lg font-semibold mb-3 text-white">
         <AiOutlineDollarCircle className="mr-2" />
         Deals

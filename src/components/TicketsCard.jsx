@@ -6,7 +6,7 @@ export const TicketsCard = () => {
     { id: 3, title: "Ticket 3", status: "In Progress" },
   ];
   return (
-    <div className="bg-neutral-900 p-5 rounded-lg hover:shadow-2xl">
+    <div className="bg-neutral-800 p-5 rounded-lg hover:shadow-2xl">
       <h2 className="text-lg font-semibold mb-3 text-white">
         <LuTicket className="mr-2" />
         Tickets
