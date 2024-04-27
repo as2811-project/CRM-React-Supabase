@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Sidebar } from "../layouts/SideLayout";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export const ContactsPage = () => {
+  const navigate = useNavigate();
   // Sample contacts data
   const [contacts, setContacts] = useState([
     {
@@ -50,7 +52,10 @@ export const ContactsPage = () => {
               className="bg-neutral-900 text-white rounded-lg shadow-md p-4 mb-4 flex justify-between items-center"
             >
               <div>
-                <h2 className="text-lg font-semibold cursor-pointer">
+                <h2
+                  className="text-lg font-semibold cursor-pointer"
+                  onClick={() => navigate(`${contact.id}`)}
+                >
                   {contact.name}
                 </h2>
                 <p className="text-white">{contact.email}</p>
