@@ -53,7 +53,7 @@ export const ContactsPage = () => {
             >
               <div>
                 <h2
-                  className="text-lg font-semibold cursor-pointer"
+                  className="text-lg hover:text-lime-500 font-semibold cursor-pointer"
                   onClick={() => navigate(`${contact.id}`)}
                 >
                   {contact.name}
