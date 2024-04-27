@@ -47,10 +47,10 @@ export const ContactsPage = () => {
           {contacts.map((contact) => (
             <div
               key={contact.id}
-              className="bg-neutral-900 rounded-lg shadow-md p-4 mb-4 flex justify-between items-center"
+              className="bg-neutral-900 text-white rounded-lg shadow-md p-4 mb-4 flex justify-between items-center"
             >
               <div>
-                <h2 className="text-white text-lg font-semibold hover:text-lime-500">
+                <h2 className="text-lg font-semibold cursor-pointer">
                   {contact.name}
                 </h2>
                 <p className="text-white">{contact.email}</p>
