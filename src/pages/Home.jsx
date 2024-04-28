@@ -1,5 +1,6 @@
 import React from "react";
 import { NavBar } from "../components/NavBar";
+import { FcSalesPerformance } from "react-icons/fc";
 export function HomePage() {
   return (
     <div>
@@ -7,7 +8,9 @@ export function HomePage() {
       <div className="relative isolate px-6 pt-14 lg:px-8">
         <div className="py-5 sm:py-10 lg:py-56">
           <div className="justify-items-start w-full">
-            <h1 className="text-6xl font-semibold text-white">Salesdesk</h1>
+            <h1 className="text-6xl font-semibold text-white text-center inline-flex items-center">
+              <FcSalesPerformance /> Salesdesk
+            </h1>
             <h2 className="text-xl text-gray-500 dark:text-lime-500">
               A CRM Project
             </h2>
