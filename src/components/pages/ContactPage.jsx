@@ -48,7 +48,7 @@ export const ContactDetailsPage = () => {
         </h1>
 
         {/* Contact Summary Section */}
-        <div className="bg-black rounded-lg shadow-md p-8 mb-8">
+        <div className="bg-neutral-800 rounded-lg shadow-md p-5 mb-4">
           <div className="flex items-center mb-4">
             <img
               src={contact.img_url}
@@ -73,13 +73,13 @@ export const ContactDetailsPage = () => {
         </div>
 
         {/* Details Section */}
-        <div className="bg-black rounded-lg shadow-md p-8 mb-8">
+        <div className="bg-neutral-800 rounded-lg shadow-md p-8 mb-4">
           <h2 className="text-xl font-semibold text-lime-500 mb-4">Details</h2>
           {/* Add details here */}
         </div>
 
         {/* Email Conversations Section */}
-        <div className="bg-black rounded-lg shadow-md p-8">
+        <div className="bg-neutral-800 rounded-lg shadow-md p-8">
           <h2 className="text-xl font-semibold text-lime-500 mb-4">
             Email Conversations
           </h2>
