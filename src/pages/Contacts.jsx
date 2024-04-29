@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { supabase } from "../utils/supabase.js";
 import { Sidebar } from "../layouts/SideLayout";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -6,30 +7,15 @@ import { HiOutlineFilter } from "react-icons/hi";
 
 export const ContactsPage = () => {
   const navigate = useNavigate();
-  // Sample contacts data
-  const [contacts, setContacts] = useState([
-    {
-      id: 1,
-      img_url:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=3000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      name: "John Doe",
-      email: "john@example.com",
-    },
-    {
-      id: 2,
-      img_url:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      name: "Jane Smith",
-      email: "jane@example.com",
-    },
-    {
-      id: 3,
-      img_url:
-        "https://images.unsplash.com/photo-1525134479668-1bee5c7c6845?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      name: "Alice Johnson",
-      email: "alice@example.com",
-    },
-  ]);
+  const [contacts, setContacts] = useState([]);
+
+  useEffect(() => {
+    async function getContacts() {
+      const { data: contacts } = await supabase.from("Contacts").select();
+      setContacts(contacts);
+    }
+    getContacts();
+  }, []);
 
   const handleEdit = (id) => {
     // Handle edit functionality
@@ -61,7 +47,7 @@ export const ContactsPage = () => {
                   className="text-lg hover:text-lime-500 font-semibold cursor-pointer"
                   onClick={() => navigate(`${contact.id}`)}
                 >
-                  {contact.name}
+                  {contact.first_name} {contact.last_name}
                 </h2>
                 <p className="text-white">{contact.email}</p>
               </div>

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { Sidebar } from "../layouts/SideLayout";
 import { FiEdit2 } from "react-icons/fi";
 import { TbFileImport } from "react-icons/tb";
+import { supabase } from "../utils/supabase";
 
 export const DealsKanban = () => {
   return (
@@ -26,7 +27,19 @@ export const DealsKanban = () => {
 };
 
 const Board = () => {
-  const [cards, setCards] = useState(DEFAULT_CARDS);
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    async function getCards() {
+      const { data: cards } = await supabase.from("Deals").select();
+
+      if (cards.length > 1) {
+        setCards(cards);
+      }
+    }
+
+    getCards();
+  }, []);
 
   return (
     <div className="flex h-full w-full gap-3 overflow-scroll mt-5">
