@@ -39,13 +39,13 @@ export const ContactsPage = () => {
         <div className="flex flex-col">
           {contacts.map((contact) => (
             <div
-              key={contact.id}
+              key={contact.contact_id}
               className="bg-neutral-900 text-white rounded-lg shadow-md p-4 mb-4 flex justify-between items-center"
             >
               <div>
                 <h2
                   className="text-lg hover:text-lime-500 font-semibold cursor-pointer"
-                  onClick={() => navigate(`${contact.id}`)}
+                  onClick={() => navigate(`${contact.contact_id}`)}
                 >
                   {contact.first_name} {contact.last_name}
                 </h2>
