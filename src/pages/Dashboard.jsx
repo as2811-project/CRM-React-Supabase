@@ -2,7 +2,6 @@ import React from "react";
 //import { SideNav } from "../components/SideNav.jsx";
 import { ContactsCard } from "../components/ContactsCard";
 import { DealsCard } from "../components/DealsCard";
-import { TicketsCard } from "../components/TicketsCard";
 import { RevPlot } from "../components/RevPlotCard";
 import { TasksCard } from "../components/TasksCard";
 import { Meetings } from "../components/ScheduleCard";
@@ -18,13 +17,11 @@ export const Dashboard = () => {
           Here's an overview of your business.
         </p>
 
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 gap-4">
           {/* Summary of Contacts */}
           <ContactsCard />
           {/* Summary of Deals */}
           <DealsCard />
-          {/* Summary of Tickets */}
-          <TicketsCard />
         </div>
         <div className="grid grid-cols-2 gap-4">
           <RevPlot />

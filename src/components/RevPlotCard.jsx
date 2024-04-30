@@ -1,31 +1,63 @@
 import { Line } from "react-chartjs-2";
-import Chart from "chart.js/auto";
+import { useEffect, useState } from "react";
+import { supabase } from "../utils/supabase";
+
 export const RevPlot = () => {
-  const revenueData = {
-    labels: ["January", "February", "March", "April", "May", "June"],
+  const [revenueData, setRevenueData] = useState({
+    labels: [],
     datasets: [
       {
         label: "Revenue",
-        data: [5000, 3000, 7000, 4000, 6000, 8000],
+        data: [],
         fill: true,
-        backgroundColor: "#1f1f1f", // Fill color
-        borderColor: "#84cc16", // Line color
-        tension: 0.4, // Smooth curve
+        backgroundColor: "#1f1f1f",
+        borderColor: "#84cc16",
+        tension: 0.4,
       },
     ],
-  };
+  });
 
-  // Configuration for the area plot
+  useEffect(() => {
+    async function fetchDealsData() {
+      const { data: deals, error } = await supabase
+        .from("Deals")
+        .select("value, deal_date")
+        .eq("column", "Closed");
+
+      if (error) {
+        console.error("Error fetching deals data:", error.message);
+        return;
+      }
+
+      const aggregatedData = aggregateDataByYear(deals);
+      const labels = Object.keys(aggregatedData).sort();
+      const values = labels.map((year) => aggregatedData[year]);
+
+      setRevenueData((prevData) => ({
+        ...prevData,
+        labels: labels,
+        datasets: [
+          {
+            ...prevData.datasets[0],
+            data: values,
+          },
+        ],
+      }));
+    }
+
+    fetchDealsData();
+  }, []);
+
   const options = {
     maintainAspectRatio: false,
     scales: {
       x: {
         title: {
           display: true,
-          text: "",
+          text: "Year",
         },
         ticks: {
-          color: "white", // X-axis ticks color
+          color: "white",
         },
       },
       y: {
@@ -34,10 +66,10 @@ export const RevPlot = () => {
           text: "Revenue",
         },
         ticks: {
-          color: "white", // X-axis ticks color
+          color: "white",
         },
         grid: {
-          display: false, // Remove grid lines on the y-axis
+          display: false,
         },
       },
     },
@@ -45,11 +77,30 @@ export const RevPlot = () => {
       legend: {
         display: false,
         labels: {
-          color: "white", // Legend label color
+          color: "white",
         },
       },
     },
   };
+
+  const aggregateDataByYear = (deals) => {
+    const aggregatedData = {};
+
+    deals.forEach((deal) => {
+      const year = getYearFromDate(deal.deal_date);
+      aggregatedData[year] = aggregatedData[year]
+        ? aggregatedData[year] + deal.value
+        : deal.value;
+    });
+
+    return aggregatedData;
+  };
+
+  const getYearFromDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.getFullYear();
+  };
+
   return (
     <div
       className="mt-5 bg-neutral-800 p-5 rounded-lg hover:shadow-2xl"
