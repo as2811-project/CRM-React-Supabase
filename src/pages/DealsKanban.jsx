@@ -52,7 +52,7 @@ const Board = () => {
       />
       <Column
         title="Demonstration"
-        column="Demo"
+        column="Demonstration"
         headingColor="text-lime-100"
         cards={cards}
         setCards={setCards}
@@ -96,7 +96,7 @@ const Column = ({ title, headingColor, cards, column, setCards }) => {
     e.dataTransfer.setData("cardId", card.id);
   };
 
-  const handleDragEnd = (e) => {
+  const handleDragEnd = async (e) => {
     const cardId = e.dataTransfer.getData("cardId");
 
     setActive(false);
@@ -104,30 +104,37 @@ const Column = ({ title, headingColor, cards, column, setCards }) => {
 
     const indicators = getIndicators();
     const { element } = getNearestIndicator(e, indicators);
+    const newColumn = element.dataset.column; // Get the new column from the drop position
 
-    const before = element.dataset.before || "-1";
+    if (newColumn) {
+      try {
+        // Update the deal in the database with the new column value
+        await updateDeal(cardId, newColumn);
 
-    if (before !== cardId) {
-      let copy = [...cards];
+        // Update the local state to reflect the new column value
+        const updatedCards = cards.map((card) =>
+          card.id === cardId ? { ...card, column: newColumn } : card
+        );
+        setCards(updatedCards);
+      } catch (error) {
+        console.error("Error updating deal:", error);
+      }
+    }
+  };
+  const updateDeal = async (cardId, newColumn) => {
+    try {
+      const { data, error } = await supabase
+        .from("Deals")
+        .update({ column: newColumn })
+        .eq("id", cardId);
 
-      let cardToTransfer = copy.find((c) => c.id === cardId);
-      if (!cardToTransfer) return;
-      cardToTransfer = { ...cardToTransfer, column };
-
-      copy = copy.filter((c) => c.id !== cardId);
-
-      const moveToBack = before === "-1";
-
-      if (moveToBack) {
-        copy.push(cardToTransfer);
-      } else {
-        const insertAtIndex = copy.findIndex((el) => el.id === before);
-        if (insertAtIndex === undefined) return;
-
-        copy.splice(insertAtIndex, 0, cardToTransfer);
+      if (error) {
+        throw new Error(error.message);
       }
 
-      setCards(copy);
+      console.log(`Deal column updated successfully: ${data}`);
+    } catch (error) {
+      console.error("Error updating deal column in database:", error.message);
     }
   };
 
@@ -233,7 +240,7 @@ const Card = ({ title, id, column, value, productName, handleDragStart }) => {
           column === "Lost" ? "border-red-700 bg-red-500 opactiy-25" : ""
         }`}
       >
-        <p className="text-sm text-neutral-100">{title}</p>
+        <p className="text-neutral-100">{title}</p>
         <p className="text-sm text-neutral-100">{value}</p>
         {productName ? (
           <span
