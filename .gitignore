@@ -24,3 +24,5 @@ yarn-error.log*
 
 supabase.js
 crmdb.db
+/api/node_modules
+/api/supabase

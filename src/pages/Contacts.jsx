@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { supabase } from "../utils/supabase.js";
 import { Sidebar } from "../layouts/SideLayout";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -8,13 +7,10 @@ import { HiOutlineFilter } from "react-icons/hi";
 export const ContactsPage = () => {
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
-
   useEffect(() => {
-    async function getContacts() {
-      const { data: contacts } = await supabase.from("Contacts").select();
-      setContacts(contacts);
-    }
-    getContacts();
+    fetch("/api/contacts/view")
+      .then((response) => response.json())
+      .then((data) => setContacts(data));
   }, []);
 
   const handleEdit = (id) => {

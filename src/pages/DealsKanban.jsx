@@ -236,7 +236,7 @@ const Card = ({ title, id, column, value, productName, handleDragStart }) => {
         layoutId={id}
         draggable="true"
         onDragStart={(e) => handleDragStart(e, { title, id, column })}
-        className={`cursor-grab rounded hover:shadow-2xl bg-neutral-800 p-3 active:cursor-grabbing ${
+        className={`cursor-grab rounded hover:shadow-2xl border border-neutral-600 bg-neutral-900 p-3 active:cursor-grabbing ${
           column === "Lost" ? "border-red-700 bg-red-500 opactiy-25" : ""
         }`}
       >
