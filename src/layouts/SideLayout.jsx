@@ -1,8 +1,9 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AiOutlineDollarCircle } from "react-icons/ai";
-import { LuLayoutDashboard, LuUsers2 } from "react-icons/lu";
+import { LuLayoutDashboard, LuUsers2, LuBox } from "react-icons/lu";
 import { MdOutlineMailOutline } from "react-icons/md";
+import { FaTasks } from "react-icons/fa";
 import { FcSalesPerformance } from "react-icons/fc";
 
 const routes = [
@@ -10,6 +11,8 @@ const routes = [
   { path: "/contacts", icon: LuUsers2, text: "Contacts" },
   { path: "/deals", icon: AiOutlineDollarCircle, text: "Deals" },
   { path: "/tickets", icon: MdOutlineMailOutline, text: "Emails" },
+  { path: "/products", icon: LuBox, text: "Products" },
+  { path: "/tasks", icon: FaTasks, text: "Tasks" },
 ];
 
 export const Sidebar = () => {

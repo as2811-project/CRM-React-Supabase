@@ -105,7 +105,7 @@ export const RevPlot = () => {
 
   return (
     <div
-      className="mt-5 bg-neutral-800 p-5 rounded-lg hover:shadow-2xl"
+      className="mt-5 bg-neutral-800 p-5 rounded-lg hover:shadow-2xl border border-neutral-700"
       style={{ width: "100%", height: "300px" }}
     >
       <h2 className="text-lg font-semibold text-white">Revenue</h2>
