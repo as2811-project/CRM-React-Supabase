@@ -6,6 +6,7 @@ import { RevPlot } from "../components/RevPlotCard";
 import { TasksCard } from "../components/TasksCard";
 import { Meetings } from "../components/ScheduleCard";
 import { Sidebar } from "../layouts/SideLayout";
+import { AccountsCard } from "../components/AccountsCard";
 
 export const Dashboard = () => {
   return (
@@ -17,17 +18,20 @@ export const Dashboard = () => {
           Here's an overview of your business.
         </p>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 gap-4">
           {/* Summary of Contacts */}
           <ContactsCard />
           {/* Summary of Deals */}
           <DealsCard />
+          <AccountsCard />
         </div>
         <div className="grid grid-cols-2 gap-4">
           <RevPlot />
           <TasksCard />
         </div>
-        <Meetings />
+        <div className="grid grid-cols-3 gap-4">
+          <Meetings />
+        </div>
       </div>
     </div>
   );
