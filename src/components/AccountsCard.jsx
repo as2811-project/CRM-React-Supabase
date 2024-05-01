@@ -14,7 +14,7 @@ export const AccountsCard = () => {
     getDealCard();
   }, []);
   return (
-    <div className="bg-neutral-800 p-5 rounded-lg hover:shadow-2xl">
+    <div className="bg-neutral-800 p-5 rounded-lg hover:shadow-2xl border border-neutral-700">
       <h2 className="text-lg font-semibold mb-3 text-white">
         <IoBusinessOutline className="mr-2" />
         Accounts

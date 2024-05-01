@@ -5,13 +5,9 @@ import { supabase } from "../utils/supabase";
 export const DealsCard = () => {
   const [deals, setDeals] = useState();
   useEffect(() => {
-    async function getDealCard() {
-      const { count: deals } = await supabase
-        .from("Deals")
-        .select("*", { count: "exact", head: true });
-      setDeals(deals);
-    }
-    getDealCard();
+    fetch("/api/deals")
+      .then((response) => response.json())
+      .then((count) => setDeals(count));
   }, []);
   return (
     <div className="bg-neutral-800 p-5 rounded-lg hover:shadow-2xl border border-neutral-700">

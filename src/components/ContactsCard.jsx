@@ -1,16 +1,12 @@
 import { useEffect, useState } from "react";
 import { LuUsers2 } from "react-icons/lu";
-import { supabase } from "../utils/supabase";
+
 export const ContactsCard = () => {
-  const [contacts, setContacts] = useState();
+  const [contacts, setContacts] = useState([]);
   useEffect(() => {
-    async function getContactCard() {
-      const { count: contacts } = await supabase
-        .from("Contacts")
-        .select("*", { count: "exact", head: true });
-      setContacts(contacts);
-    }
-    getContactCard();
+    fetch("/api/contacts?count=True")
+      .then((response) => response.json())
+      .then((count) => setContacts(count));
   }, []);
   return (
     <div className="bg-neutral-800 p-5 rounded-lg hover:shadow-2xl border border-neutral-700">
