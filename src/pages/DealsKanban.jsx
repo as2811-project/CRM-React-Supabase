@@ -30,15 +30,9 @@ const Board = () => {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    async function getCards() {
-      const { data: cards } = await supabase.from("Deals").select();
-
-      if (cards.length > 1) {
-        setCards(cards);
-      }
-    }
-
-    getCards();
+    fetch("/api/deals/view")
+      .then((response) => response.json())
+      .then((data) => setCards(data));
   }, []);
 
   return (

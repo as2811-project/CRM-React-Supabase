@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import Dashboard from './pages/Dashboard';
 import { TicketsPage } from './pages/Tickets';
+import { AccountsPage } from './pages/Accounts';
 import { DealsKanban } from './pages/DealsKanban';
 
 
@@ -68,6 +69,7 @@ export default function App() {
         <Route path="/tickets" element={<Tickets />} />
         <Route path="/tickets/:id" element={<TicketDetailsPage />} />
         <Route path="/deals" element={<Deals />} />
+        <Route path="/accounts" element={<AccountsPage />} />
       </Routes>
     </div>
   );

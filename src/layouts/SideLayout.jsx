@@ -5,11 +5,13 @@ import { LuLayoutDashboard, LuUsers2, LuBox } from "react-icons/lu";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { FaTasks } from "react-icons/fa";
 import { FcSalesPerformance } from "react-icons/fc";
+import { IoBusinessOutline } from "react-icons/io5";
 
 const routes = [
   { path: "/dashboard", icon: LuLayoutDashboard, text: "Dashboard" },
   { path: "/contacts", icon: LuUsers2, text: "Contacts" },
   { path: "/deals", icon: AiOutlineDollarCircle, text: "Deals" },
+  { path: "/accounts", icon: IoBusinessOutline, text: "Accounts" },
   { path: "/tickets", icon: MdOutlineMailOutline, text: "Emails" },
   { path: "/products", icon: LuBox, text: "Products" },
   { path: "/tasks", icon: FaTasks, text: "Tasks" },
