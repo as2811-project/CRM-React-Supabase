@@ -30,11 +30,21 @@ const Board = () => {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    fetch("/api/deals/view")
+    fetch("/api/deals/view", {
+      method: "POST", // Corrected method to POST
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        user_id: sessionStorage.getItem("user_id").replace(/['"]+/g, ""),
+      }),
+    })
       .then((response) => response.json())
-      .then((data) => setCards(data));
+      .then((response) => {
+        setCards(response);
+      });
   }, []);
-
   return (
     <div className="flex h-full w-full gap-3 overflow-scroll mt-5">
       <Column
