@@ -4,14 +4,25 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import { FaUserPlus } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineFilter } from "react-icons/hi";
-
 export const ContactsPage = () => {
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
+
   useEffect(() => {
-    fetch("/api/contacts/view")
+    fetch("/api/contacts/view", {
+      method: "POST", // Corrected method to POST
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        user_id: sessionStorage.getItem("user_id").replace(/['"]+/g, ""),
+      }),
+    })
       .then((response) => response.json())
-      .then((data) => setContacts(data));
+      .then((response) => {
+        setContacts(response);
+      });
   }, []);
 
   const handleEdit = (id) => {

@@ -1,16 +1,57 @@
 import React, { useState } from "react";
-//import axios from "axios";
-//import { useNavigate } from "react-router-dom";
-//import { setUserSession } from "../service/Auth";
+import { useNavigate } from "react-router-dom";
+import { setUserSession } from "../service/Auth";
 
 export const LoginForm = () => {
+  let navigate = useNavigate();
+  const [useremail, setUseremail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    if (useremail === "" || password.trim() === "") {
+      setErrorMessage("Both username and password are required");
+      return;
+    }
+    setErrorMessage(null);
+    // const requestBody = {
+    //   email: useremail,
+    //   password: password,
+    // };
+
+    fetch("/api/login", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+
+      //make sure to serialize your JSON body
+      body: JSON.stringify({
+        email: useremail,
+      }),
+    })
+      .then((response) => response.json())
+      .then((body) => {
+        console.log(body[0].email);
+        setUserSession(body[0].user_id);
+        setIsLoggedIn(true);
+      });
+  };
+
+  if (isLoggedIn) {
+    navigate("/dashboard");
+  }
+
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <h1 className="text-4xl font-bold tracking-tight text-violet-400 sm:text-3xl">
           Login
         </h1>
-        <form className="space-y-6" method="POST">
+        <form className="space-y-6" onSubmit={submitHandler} method="POST">
           <div>
             <label
               htmlFor="email"
@@ -21,10 +62,10 @@ export const LoginForm = () => {
             <div className="mt-2">
               <input
                 id="email"
-                //value={useremail}
+                value={useremail}
                 type="email"
                 autoComplete="email"
-                //onChange={(e) => setUseremail(e.target.value)}
+                onChange={(e) => setUseremail(e.target.value)}
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
@@ -43,10 +84,10 @@ export const LoginForm = () => {
             <div className="mt-2">
               <input
                 id="password"
-                //value={password}
+                value={password}
                 type="password"
                 autoComplete="current-password"
-                //onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
@@ -62,6 +103,26 @@ export const LoginForm = () => {
             </button>
           </div>
         </form>
+        {errorMessage && (
+          <div
+            class="flex items-center mt-4 p-4 mb-4 text-sm text-red-800 rounded-lg bg-stone-900 dark:bg-gray-800 dark:text-red-400"
+            role="alert"
+          >
+            <svg
+              class="flex-shrink-0 inline w-4 h-4 me-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-medium">{errorMessage}</span>
+            </div>
+          </div>
+        )}
 
         <p className="mt-10 text-center text-sm text-gray-500">
           Not a member?{" "}

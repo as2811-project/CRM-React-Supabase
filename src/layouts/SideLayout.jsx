@@ -4,8 +4,9 @@ import { AiOutlineDollarCircle } from "react-icons/ai";
 import { LuLayoutDashboard, LuUsers2, LuBox } from "react-icons/lu";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { FaTasks } from "react-icons/fa";
-import { FcSalesPerformance } from "react-icons/fc";
+import { LuRocket } from "react-icons/lu";
 import { IoBusinessOutline } from "react-icons/io5";
+import { IoAnalyticsOutline } from "react-icons/io5";
 
 const routes = [
   { path: "/dashboard", icon: LuLayoutDashboard, text: "Dashboard" },
@@ -15,6 +16,7 @@ const routes = [
   { path: "/tickets", icon: MdOutlineMailOutline, text: "Emails" },
   { path: "/products", icon: LuBox, text: "Products" },
   { path: "/tasks", icon: FaTasks, text: "Tasks" },
+  { path: "/analytics", icon: IoAnalyticsOutline, text: "Analytics" },
 ];
 
 export const Sidebar = () => {
@@ -23,8 +25,8 @@ export const Sidebar = () => {
   return (
     <div className="sidebar text-white h-screen w-56 fixed left-0 top-0 pr-5 bg-neutral-800 rounded-md">
       <div className="p-5">
-        <h2 className="text-2xl mb-3 ml-2 text-center inline-flex items-center">
-          <FcSalesPerformance /> Salesdesk
+        <h2 className="text-2xl mb-3 ml-2 text-center font-semibold inline-flex items-center">
+          <LuRocket className="mr-2" /> Rocketship
         </h2>
         <ul className="flex-col mt-5 text-sm">
           {routes.map((route, index) => (
