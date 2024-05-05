@@ -1,25 +1,61 @@
+import React from "react";
 import { Link } from "react-router-dom";
-export const NavBar = () => {
-  return (
-    <header className="absolute inset-x-0 top-0 z-50">
-      <nav
-        className="flex items-center text-white justify-between p-6 lg:px-8"
-        aria-label="Global"
-      >
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          {/* Conditional rendering based on useremail */}
+import { useNavigate } from "react-router-dom";
+import { LuRocket } from "react-icons/lu";
 
-          <li>
-            <Link to="/login">Log In</Link>
-          </li>
-          <li>
-            <Link to="/register">Register</Link>
-          </li>
+export function NavBar() {
+  const navigate = useNavigate();
+  const user = sessionStorage.getItem("user_id");
+  const username = sessionStorage.getItem("Username");
+
+  const logout = () => {
+    sessionStorage.removeItem("user_id");
+    sessionStorage.removeItem("Username");
+    handleLogout();
+    navigate("/");
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("user_id");
+  };
+
+  return (
+    <header className="absolute inset-x-0 top-0 z-50 bg-neutral-800">
+      <nav className="flex p-5 lg:px-8" aria-label="Global">
+        <h2 className="text-2xl ml-2 text-center font-semibold inline-flex text-white items-center">
+          <LuRocket className="mr-2" /> Rocketship
+        </h2>
+        <ul>
+          {/* Conditional rendering based on useremail */}
+          {!user && (
+            <>
+              <li>
+                <Link to="/" className="text-white justify-items-centre">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/login" className="text-white justify-items-centre">
+                  Log In
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
+        <div className="flex items-center">
+          {user && (
+            <div className="mr-4">
+              {/* Display username */}
+              <span className="text-gray-500">{username}</span>
+            </div>
+          )}
+          {user && (
+            <button onClick={logout} className="mr-4 text-white">
+              Logout
+            </button>
+          )}
+        </div>
       </nav>
     </header>
   );
-};
+}

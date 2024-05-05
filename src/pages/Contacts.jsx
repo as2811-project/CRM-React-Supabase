@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Sidebar } from "../layouts/SideLayout";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import { FaUserPlus } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineFilter } from "react-icons/hi";
 export const ContactsPage = () => {

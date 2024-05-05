@@ -13,6 +13,7 @@ import Dashboard from './pages/Dashboard';
 import { TicketsPage } from './pages/Tickets';
 import { AccountsPage } from './pages/Accounts';
 import { DealsKanban } from './pages/DealsKanban';
+import { NavBar } from './components/NavBar';
 
 
 const Home = () => {
@@ -60,6 +61,7 @@ const Deals = () => {
 export default function App() {
   return (
     <div>
+      <NavBar />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
