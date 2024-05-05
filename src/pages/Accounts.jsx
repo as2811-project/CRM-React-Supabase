@@ -9,9 +9,20 @@ export const AccountsPage = () => {
   const navigate = useNavigate();
   const [accounts, setAccounts] = useState([]);
   useEffect(() => {
-    fetch("/api/accounts/view")
+    fetch("/api/accounts/view", {
+      method: "POST", // Corrected method to POST
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        user_id: sessionStorage.getItem("user_id").replace(/["]+/g, ""),
+      }),
+    })
       .then((response) => response.json())
-      .then((data) => setAccounts(data));
+      .then((response) => {
+        setAccounts(response);
+      });
   }, []);
 
   // const handleEdit = (id) => {

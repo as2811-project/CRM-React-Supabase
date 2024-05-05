@@ -42,15 +42,52 @@ app.get('/api/deals', async (req, res) => {
 
 app.post('/api/deals/view', async (req, res) => {
     try {
-        const { data, error } = await supabase.from('Deals').select('*').eq('Deal Owner', req.body.user_id);
-        if (error) {
-            throw error;
+        // Check if the user is an admin
+
+        const isAdmin = await checkAdminRole(req.body.user_id);
+        console.log(req.body.user_id)
+        // Query the database based on user role
+        let data;
+        if (isAdmin) {
+            // Admin can view all records
+            const { data: allData, error } = await supabase.from('Deals').select('*');
+            if (error) {
+                throw error;
+            }
+            data = allData;
+        } else {
+            // Regular user can view only their own records
+            const { data: userData, error } = await supabase.from('Deals').select('*').eq('Deal Owner', req.body.user_id);
+            if (error) {
+                throw error;
+            }
+            data = userData;
         }
+
         res.send(data);
     } catch (error) {
         res.sendStatus(500).send({ error: 'Internal Server Error' });
     }
 });
+
+// Function to check if user is an admin
+async function checkAdminRole(userId) {
+    try {
+        // Query the "users" table to get user's role
+        console.log(userId)
+        const { data, error } = await supabase.from('users').select('Role').eq('user_id', userId);
+        if (error) {
+            throw error;
+        }
+        // Check if user is admin
+        console.log(data)
+        return data[0].Role == 'Admin';
+    } catch (error) {
+        console.error('Error checking admin role:', error.message);
+        return false; // Default to regular user role if error occurs
+    }
+}
+
 
 app.get('/api/accounts', async (req, res) => {
     try {
@@ -64,13 +101,31 @@ app.get('/api/accounts', async (req, res) => {
     }
 });
 
-app.get('/api/accounts/view', async (req, res) => {
+app.post('/api/accounts/view', async (req, res) => {
     try {
-        const { data, error } = await supabase.from('Accounts').select('account_id,company_name,phone_number');
-        if (error) {
-            throw error;
+        // Check if the user is an admin
+
+        const isAdmin = await checkAdminRole(req.body.user_id);
+        console.log(req.body.user_id)
+        // Query the database based on user role
+        let data;
+        if (isAdmin) {
+            // Admin can view all records
+            const { data: allData, error } = await supabase.from('Accounts').select('*');
+            if (error) {
+                throw error;
+            }
+            data = allData;
+        } else {
+            // Regular user can view only their own records
+            const { data: userData, error } = await supabase.from('Accounts').select('*').eq('Account Owner', req.body.user_id);
+            if (error) {
+                throw error;
+            }
+            data = userData;
         }
-        res.json(data);
+
+        res.send(data);
     } catch (error) {
         res.sendStatus(500).send({ error: 'Internal Server Error' });
     }
@@ -79,11 +134,11 @@ app.get('/api/accounts/view', async (req, res) => {
 
 app.post('/api/login', async (req, res) => {
     try {
+        console.log(req)
         const { data, error } = await supabase.from('users').select('*').eq('email', req.body.email);
         if (error) {
             throw error;
         }
-        //console.log(data[0].email)
         res.send(data);
     } catch (error) {
         //res.sendStatus(500).send({ error: 'Internal Server Error' });

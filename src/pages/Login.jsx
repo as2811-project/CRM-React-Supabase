@@ -36,7 +36,7 @@ export const LoginForm = () => {
       .then((response) => response.json())
       .then((body) => {
         console.log(body[0].email);
-        setUserSession(body[0].user_id);
+        setUserSession(body[0].user_id.replace(/['"]+/g, ""), body[0].Username);
         setIsLoggedIn(true);
       });
   };
@@ -48,7 +48,7 @@ export const LoginForm = () => {
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <h1 className="text-4xl font-bold tracking-tight text-violet-400 sm:text-3xl">
+        <h1 className="text-4xl font-bold tracking-tight text-lime-400 sm:text-3xl">
           Login
         </h1>
         <form className="space-y-6" onSubmit={submitHandler} method="POST">
@@ -97,7 +97,7 @@ export const LoginForm = () => {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-violet-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-violet-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="flex w-full justify-center rounded-md bg-lime-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-lime-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Sign in
             </button>
@@ -128,7 +128,7 @@ export const LoginForm = () => {
           Not a member?{" "}
           <a
             href="/signup"
-            className="font-semibold leading-6 text-violet-400 hover:text-violet-500"
+            className="font-semibold leading-6 text-lime-400 hover:text-lime-500"
           >
             Sign Up!
           </a>
