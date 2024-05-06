@@ -17,14 +17,31 @@ app.get('/api/contacts', async (req, res) => {
 
 app.post('/api/contacts/view', async (req, res) => {
     try {
-        const { data, error } = await supabase.from('Contacts').select('*').eq('Agent', req.body.user_id);
-        if (error) {
-            throw error;
+        // Check if the user is an admin
+
+        const isAdmin = await checkAdminRole(req.body.user_id);
+        console.log(req.body.user_id)
+        // Query the database based on user role
+        let data;
+        if (isAdmin) {
+            // Admin can view all records
+            const { data: allData, error } = await supabase.from('Contacts').select('*');
+            if (error) {
+                throw error;
+            }
+            data = allData;
+        } else {
+            // Regular user can view only their own records
+            const { data: userData, error } = await supabase.from('Contacts').select('*').eq('Agent', req.body.user_id);
+            if (error) {
+                throw error;
+            }
+            data = userData;
         }
-        //console.log(data[0].email)
+
         res.send(data);
     } catch (error) {
-        //res.sendStatus(500).send({ error: 'Internal Server Error' });
+        res.sendStatus(500).send({ error: 'Internal Server Error' });
     }
 });
 
@@ -67,6 +84,19 @@ app.post('/api/deals/view', async (req, res) => {
         res.send(data);
     } catch (error) {
         res.sendStatus(500).send({ error: 'Internal Server Error' });
+    }
+});
+
+app.post('/api/deals', async (req, res) => {
+    try {
+        console.log(req);
+        const { data, error } = await supabase.from('Deals').insert({ id: req.body.id, title: req.body.title, value: req.body.value, column: req.body.column }).select();
+        if (error) {
+            throw error;
+        }
+        res.send(data);
+    } catch (error) {
+        console.log(error);
     }
 });
 
