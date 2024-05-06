@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const supabase = require('./supabase.js')
+const bcrypt = require('bcrypt');
 
 app.use(express.json());
 app.get('/api/contacts', async (req, res) => {
@@ -164,10 +165,31 @@ app.post('/api/accounts/view', async (req, res) => {
 
 app.post('/api/login', async (req, res) => {
     try {
-        const { data, error } = await supabase.from('users').select('*').eq('email', req.body.email).eq('password', req.body.password);
+        console.log(req.body.password);
+        const { data, error } = await supabase.from('users').select('*').eq('email', req.body.email);
+        const passwordMatch = bcrypt.compareSync(req.body.password, data[0].password);
+        if (!data) {
+            console.log("Error. Email or Password is wrong.")
+        }
+        if (passwordMatch) {
+            res.send(data);
+        }
+        else {
+            throw error;
+        }
+    } catch (error) {
+        console.log("Error: Email or Password is wrong.")
+    }
+});
+
+app.post('/api/register', async (req, res) => {
+    try {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const { data, error } = await supabase.from('users').insert({ email: req.body.email, password: hashedPassword, Role: req.body.role }).select();
         if (error) {
             throw error;
         }
+        console.log(data);
         res.send(data);
     } catch (error) {
         console.log(error);

@@ -14,6 +14,9 @@ import { TicketsPage } from './pages/Tickets';
 import { AccountsPage } from './pages/Accounts';
 import { DealsKanban } from './pages/DealsKanban';
 import { NavBar } from './components/NavBar';
+import { RegForm } from './pages/AddUser';
+import { getUser } from './service/Auth';
+import { Error } from './pages/ErrorPage';
 
 
 const Home = () => {
@@ -28,10 +31,23 @@ const Login = () => {
   )
 }
 
-const Dash = () => {
+const Register = () => {
   return (
-    <Dashboard />
+    <RegForm />
   )
+}
+
+const Dash = () => {
+  if (!sessionStorage.getItem("user_id")) {
+    return (
+      <Error />
+    )
+  }
+  else {
+    return (
+      <Dashboard />
+    )
+  }
 }
 
 const Contact = () => {
@@ -72,6 +88,7 @@ export default function App() {
         <Route path="/tickets/:id" element={<TicketDetailsPage />} />
         <Route path="/deals" element={<Deals />} />
         <Route path="/accounts" element={<AccountsPage />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );
