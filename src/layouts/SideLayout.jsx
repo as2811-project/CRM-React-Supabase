@@ -7,6 +7,7 @@ import { FaTasks } from "react-icons/fa";
 import { LuRocket } from "react-icons/lu";
 import { IoBusinessOutline } from "react-icons/io5";
 import { IoAnalyticsOutline } from "react-icons/io5";
+import { FaUserPlus } from "react-icons/fa6";
 
 const routes = [
   { path: "/dashboard", icon: LuLayoutDashboard, text: "Dashboard" },
@@ -17,6 +18,7 @@ const routes = [
   { path: "/products", icon: LuBox, text: "Products" },
   { path: "/tasks", icon: FaTasks, text: "Tasks" },
   { path: "/analytics", icon: IoAnalyticsOutline, text: "Analytics" },
+  { path: "/register", icon: FaUserPlus, text: "Add New User" },
 ];
 
 export const Sidebar = () => {
