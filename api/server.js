@@ -164,14 +164,13 @@ app.post('/api/accounts/view', async (req, res) => {
 
 app.post('/api/login', async (req, res) => {
     try {
-        console.log(req)
-        const { data, error } = await supabase.from('users').select('*').eq('email', req.body.email);
+        const { data, error } = await supabase.from('users').select('*').eq('email', req.body.email).eq('password', req.body.password);
         if (error) {
             throw error;
         }
         res.send(data);
     } catch (error) {
-        //res.sendStatus(500).send({ error: 'Internal Server Error' });
+        console.log(error);
     }
 });
 

@@ -31,13 +31,22 @@ export const LoginForm = () => {
       //make sure to serialize your JSON body
       body: JSON.stringify({
         email: useremail,
+        password: password,
       }),
     })
       .then((response) => response.json())
       .then((body) => {
-        console.log(body[0].email);
-        setUserSession(body[0].user_id.replace(/['"]+/g, ""), body[0].Username);
-        setIsLoggedIn(true);
+        if (body.length === 0) {
+          console.log("User does not exist");
+          // Display a message or take any other action as needed
+        } else {
+          console.log(body[0].email);
+          setUserSession(
+            body[0].user_id.replace(/['"]+/g, ""),
+            body[0].Username
+          );
+          setIsLoggedIn(true);
+        }
       });
   };
 
