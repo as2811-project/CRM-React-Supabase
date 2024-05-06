@@ -25,23 +25,6 @@ export function NavBar() {
         <h2 className="text-2xl ml-2 text-center font-semibold inline-flex text-white items-center">
           <LuRocket className="mr-2" /> Rocketship
         </h2>
-        <ul>
-          {/* Conditional rendering based on useremail */}
-          {!user && (
-            <>
-              <li>
-                <Link to="/" className="text-white justify-items-centre">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/login" className="text-white justify-items-centre">
-                  Log In
-                </Link>
-              </li>
-            </>
-          )}
-        </ul>
         <div className="flex items-center">
           {user && (
             <div className="mr-4">

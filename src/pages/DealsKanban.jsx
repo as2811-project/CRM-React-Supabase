@@ -239,8 +239,6 @@ const CardSkeleton = () => {
       <div className="skeleton-card-placeholder h-4 rounded-md w-full mb-2"></div>{" "}
       {/* Placeholder for value */}
       <div className="skeleton-card-placeholder h-4 rounded-md  me-2 px-2.5 py-0.5 rounded"></div>{" "}
-      {/* Placeholder for productName */}
-      <div className="skeleton-card-placeholder ml-44 mt-2 px-2 rounded-md py-2 pr-6"></div>
     </div>
   );
 };
@@ -269,7 +267,7 @@ const Card = ({ title, id, column, value, productName, handleDragStart }) => {
         layoutId={id}
         draggable="true"
         onDragStart={(e) => handleDragStart(e, { title, id, column })}
-        className={`cursor-grab rounded hover:shadow-2xl border border-neutral-600 bg-neutral-900 p-3 active:cursor-grabbing ${
+        className={`cursor-grab rounded-md hover:shadow-2xl bg-neutral-700 pb-3 p-3 active:cursor-grabbing ${
           column === "Lost" ? "border-red-700 bg-red-500 opactiy-25" : ""
         }`}
       >
@@ -286,9 +284,6 @@ const Card = ({ title, id, column, value, productName, handleDragStart }) => {
         ) : (
           <p className="text-sm text-neutral-100">{value}</p>
         )}
-        <div className="ml-44 text-white px-2 hover:bg-gray-700 rounded-md px-4 py-1 pr-6">
-          <FiEdit2 />
-        </div>
       </motion.div>
     </>
   );
@@ -317,6 +312,7 @@ const AddCard = ({ column, setCards }) => {
       column,
       title: text.trim(),
       id: Math.random().toString(),
+      value: text.trim(),
     };
 
     setCards((pv) => [...pv, newCard]);
@@ -328,12 +324,29 @@ const AddCard = ({ column, setCards }) => {
     <>
       {adding ? (
         <motion.form layout onSubmit={handleSubmit}>
-          <textarea
-            onChange={(e) => setText(e.target.value)}
-            autoFocus
-            placeholder="Add new Deal..."
-            className="w-full rounded border border-lime-400 bg-lime-400/20 p-3 text-sm text-neutral-50 focus:outline-0"
-          />
+          <div className="bg-neutral-900">
+            <input
+              onChange={(e) => setText(e.target.value)}
+              autoFocus
+              placeholder="Add Deal Title"
+              type="text"
+              className="w-full rounded border border-lime-400 bg-lime-400/20 p-2 mb-2 text-sm text-neutral-50 focus:outline-0"
+            ></input>
+            <input
+              onChange={(e) => setText(e.target.value)}
+              autoFocus
+              placeholder="Add Deal Value"
+              type="text"
+              className="w-full rounded border border-lime-400 bg-lime-400/20 p-2 mb-2 text-sm text-neutral-50 focus:outline-0"
+            ></input>
+            <input
+              onChange={(e) => setText(e.target.value)}
+              autoFocus
+              placeholder="Add Deal Product"
+              type="text"
+              className="w-full rounded border border-lime-400 bg-lime-400/20 p-2text-sm text-neutral-50 focus:outline-0"
+            ></input>
+          </div>
           <div className="mt-1.5 flex items-center justify-end gap-1.5">
             <button
               onClick={() => setAdding(false)}
