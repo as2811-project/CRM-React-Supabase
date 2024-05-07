@@ -5,6 +5,7 @@ import { Sidebar } from "../layouts/SideLayout";
 import { FiEdit2 } from "react-icons/fi";
 import { TbFileImport } from "react-icons/tb";
 import { supabase } from "../utils/supabase";
+import { ImportModal } from "../components/modals/ImportDeals";
 
 export const DealsKanban = () => {
   return (

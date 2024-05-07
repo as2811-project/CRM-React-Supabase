@@ -21,7 +21,7 @@ export function NavBar() {
 
   return (
     <header className="absolute inset-x-0 top-0 z-50 bg-neutral-800">
-      <nav className="flex p-5 lg:px-8" aria-label="Global">
+      <nav className="flex p-5 lg:px-8 " aria-label="Global">
         <h2 className="text-2xl ml-2 text-center font-semibold inline-flex text-white items-center">
           <LuRocket className="mr-2" /> Rocketship
         </h2>

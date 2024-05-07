@@ -58,4 +58,15 @@ body {
   animation: shimmer 1s; /* Shimmer animation */
 }
 
+.products-content-title {
+  padding-left: 275px;
+  margin-right:10px; 
+  padding-top: 90px;
+}
+
+.products-content {
+  padding-left: 275px;
+  margin-right:10px; 
+  padding-top: 40px;
+}
 
