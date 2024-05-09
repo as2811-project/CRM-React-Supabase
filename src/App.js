@@ -18,6 +18,7 @@ import { RegForm } from './pages/AddUser';
 import { getUser } from './service/Auth';
 import { Error } from './pages/ErrorPage';
 import { ProductList } from './pages/Products';
+import { TaskPage } from './pages/Tasks';
 
 
 const Home = () => {
@@ -97,6 +98,7 @@ export default function App() {
         <Route path="/accounts" element={<AccountsPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/tasks" element={<TaskPage />} />
       </Routes>
     </div>
   );

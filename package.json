@@ -6,6 +6,7 @@
   "dependencies": {
     "@ant-design/charts": "^2.1.0",
     "@ant-design/plots": "^1.2.5",
+    "@nextui-org/calendar": "^2.0.4",
     "@radix-ui/themes": "^3.0.3",
     "@sentry/react": "^7.113.0",
     "@supabase/auth-ui-react": "^0.4.7",
