@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Sidebar } from "../layouts/SideLayout";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { HiOutlineFilter } from "react-icons/hi";
+import { LuUserPlus2 } from "react-icons/lu";
 export const ContactsPage = () => {
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
@@ -40,8 +40,8 @@ export const ContactsPage = () => {
       <div className="dashboard-content mx-auto ml-64">
         <h1 className="text-2xl font-light mb-3 text-white">Contacts</h1>
         <button className="bg-lime-500 hover:bg-lime-600 text-white text-sm font-bold mb-5 px-3 py-1.5 rounded-full text-center inline-flex items-center">
-          <HiOutlineFilter />
-          Filter
+          <LuUserPlus2 />
+          Add Contact
         </button>
         <div className="flex flex-col">
           {contacts.map((contact) => (

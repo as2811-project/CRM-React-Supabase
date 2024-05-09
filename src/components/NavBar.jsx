@@ -6,7 +6,7 @@ import { LuRocket } from "react-icons/lu";
 export function NavBar() {
   const navigate = useNavigate();
   const user = sessionStorage.getItem("user_id");
-  const username = sessionStorage.getItem("Username");
+  const username = sessionStorage.getItem("user_name");
 
   const logout = () => {
     sessionStorage.removeItem("user_id");
@@ -29,7 +29,9 @@ export function NavBar() {
           {user && (
             <div className="mr-4">
               {/* Display username */}
-              <span className="text-gray-500">{username}</span>
+              <span className="text-gray-500">
+                {username.replace(/^"(.*)"$/, "$1")}
+              </span>
             </div>
           )}
           {user && (

@@ -1,6 +1,5 @@
 import { AiOutlineDollarCircle } from "react-icons/ai";
 import { useState, useEffect } from "react";
-import { supabase } from "../utils/supabase";
 
 export const DealsCard = () => {
   const [deals, setDeals] = useState();

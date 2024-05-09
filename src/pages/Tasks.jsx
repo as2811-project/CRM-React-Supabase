@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Sidebar } from "../layouts/SideLayout";
 //import { Calendar } from "../components/Calendar";
-import { FaEdit } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
-import { HiOutlineFilter } from "react-icons/hi";
 import { FaArrowRight, FaArrowLeft, FaCheck } from "react-icons/fa6";
+import { MdAddTask } from "react-icons/md";
 
 import "../theme.css";
 
@@ -125,8 +124,8 @@ export const TaskPage = () => {
           <h1 className="text-2xl font-light text-white">Tasks</h1>
           <p className="mb-3 text-white">Select a date above to view tasks</p>
           <button className="bg-lime-500 hover:bg-lime-600 text-white text-sm font-bold mb-5 px-3 py-1.5 rounded-full text-center inline-flex items-center">
-            <HiOutlineFilter />
-            Filter
+            <MdAddTask />
+            Add Task
           </button>
           <div className="flex flex-col">
             {tasks.map((task) => (
