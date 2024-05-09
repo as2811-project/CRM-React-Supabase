@@ -174,6 +174,35 @@ app.get('/api/products', async (req, res) => {
     }
 });
 
+app.post('/api/tasks', async (req, res) => {
+    try {
+
+        const isAdmin = await checkAdminRole(req.body.user_id);
+        let data;
+        if (isAdmin) {
+            const { data: allData, error } = await supabase.from('Tasks').select('*');
+            if (error) {
+                throw error;
+            }
+            data = allData;
+        } else {
+            const { data: userData, error } = await supabase
+                .from('Tasks')
+                .select('*, Contacts(first_name, last_name), users(Username)')
+                .eq('task_owner', req.body.user_id)
+                .eq('due_date', req.body.date);
+            if (error) {
+                throw error;
+            }
+            data = userData;
+        }
+        console.log(data)
+        res.send(data);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 
 app.post('/api/login', async (req, res) => {
     try {
