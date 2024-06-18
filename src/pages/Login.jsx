@@ -21,7 +21,7 @@ export const LoginForm = () => {
     //   password: password,
     // };
 
-    fetch("/api/login", {
+    fetch("/auth/login", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -40,11 +40,8 @@ export const LoginForm = () => {
           console.log("User does not exist");
           // Display a message or take any other action as needed
         } else {
-          console.log(body[0].email);
-          setUserSession(
-            body[0].user_id.replace(/['"]+/g, ""),
-            body[0].Username
-          );
+          console.log(body.user.email);
+          setUserSession(body.user.id, body.accessToken);
           setIsLoggedIn(true);
         }
       });

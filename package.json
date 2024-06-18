@@ -1,7 +1,7 @@
 {
   "name": "crmv2",
   "version": "0.1.0",
-  "proxy": "http://localhost:3300/",
+  "proxy": "http://localhost:5149",
   "private": true,
   "dependencies": {
     "@ant-design/charts": "^2.1.0",

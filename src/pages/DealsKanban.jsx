@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { Sidebar } from "../layouts/SideLayout";
-import { FiEdit2 } from "react-icons/fi";
 import { TbFileImport } from "react-icons/tb";
 import { supabase } from "../utils/supabase";
-import { ImportModal } from "../components/modals/ImportDeals";
 
 export const DealsKanban = () => {
   return (
@@ -248,12 +246,9 @@ const Card = ({ title, id, column, value, productName, handleDragStart }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading data
     const timeout = setTimeout(() => {
       setLoading(false);
-    }, 1000); // Adjust this timeout as needed
-
-    // Cleanup function
+    }, 1000);
     return () => clearTimeout(timeout);
   }, []);
 

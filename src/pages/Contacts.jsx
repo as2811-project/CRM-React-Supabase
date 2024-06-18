@@ -6,17 +6,15 @@ import { LuUserPlus2 } from "react-icons/lu";
 export const ContactsPage = () => {
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
-
+  //token = sessionStorage.getItem("accessToken");
   useEffect(() => {
-    fetch("/api/contacts/view", {
-      method: "POST", // Corrected method to POST
+    fetch("/api/contacts", {
+      method: "GET", // Corrected method to POST
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        Authorization: sessionStorage.getItem("accessToken"),
       },
-      body: JSON.stringify({
-        user_id: sessionStorage.getItem("user_id").replace(/['"]+/g, ""),
-      }),
     })
       .then((response) => response.json())
       .then((response) => {

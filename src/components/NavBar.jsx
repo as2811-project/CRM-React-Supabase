@@ -6,11 +6,11 @@ import { LuRocket } from "react-icons/lu";
 export function NavBar() {
   const navigate = useNavigate();
   const user = sessionStorage.getItem("user_id");
-  const username = sessionStorage.getItem("user_name");
+  const username = sessionStorage.getItem("accessToken");
 
   const logout = () => {
     sessionStorage.removeItem("user_id");
-    sessionStorage.removeItem("Username");
+    sessionStorage.removeItem("accessToken");
     handleLogout();
     navigate("/");
   };
@@ -26,14 +26,6 @@ export function NavBar() {
           <LuRocket className="mr-2" /> Rocketship
         </h2>
         <div className="flex items-center">
-          {user && (
-            <div className="mr-4">
-              {/* Display username */}
-              <span className="text-gray-500">
-                {username.replace(/^"(.*)"$/, "$1")}
-              </span>
-            </div>
-          )}
           {user && (
             <button onClick={logout} className="mr-4 text-white">
               Logout

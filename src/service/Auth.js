@@ -8,10 +8,10 @@ module.exports = {
         }
     },
 
-    setUserSession: function (user_id, user_name) {
-        const user = { user_id, user_name }; // Create an object with username and useremail
+    setUserSession: function (user_id, accessToken) {
+        const user = { user_id, accessToken }; // Create an object with username and useremail
         sessionStorage.setItem('user_id', JSON.stringify(user.user_id));
-        sessionStorage.setItem('user_name', JSON.stringify(user.user_name)); // Store the object in sessionStorage
+        sessionStorage.setItem('accessToken', JSON.stringify(user.accessToken)); // Store the object in sessionStorage
     },
 
     resetUserSession: function () {
